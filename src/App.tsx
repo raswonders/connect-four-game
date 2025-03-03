@@ -1,7 +1,7 @@
+import { GameBoard } from "./components/ui/GameBoard";
+
 function App() {
-  return (
-    <h1 className="text-2xl">Hello world</h1>
-  )
+  return <GameBoard />;
 }
 
-export default App
+export default App;
