@@ -1,7 +1,7 @@
-import { GameBoard } from "./components/ui/GameBoard";
+import { GameGrid } from "./components/ui/GameGrid";
 
 function App() {
-  return <GameBoard />;
+  return <GameGrid />;
 }
 
 export default App;
