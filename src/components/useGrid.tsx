@@ -1,7 +1,5 @@
 import { useState } from "react";
 
-const COLS = 7;
-const ROWS = 6;
 const playerAI = -1 as const;
 const playerOne = 1 as const;
 const playerTwo = 2 as const;
@@ -9,17 +7,17 @@ const playerEmpty = 0 as const;
 
 type Player = -1 | 0 | 1 | 2;
 
-export function useGrid() {
+export function useGrid(rows: number, cols: number) {
   const [grid, setGrid] = useState<Player[][]>(
-    Array.from({ length: ROWS }, () => {
-      return Array(COLS).fill(0);
+    Array.from({ length: rows }, () => {
+      return Array(cols).fill(0);
     })
   );
 
   function addDisc(col: number, player: Player) {
     setGrid((prevGrid) => {
       const newGrid = prevGrid.map((row) => [...row]);
-      for (let row = ROWS - 1; row >= 0; row--) {
+      for (let row = rows - 1; row >= 0; row--) {
         if (newGrid[row][col] === 0) {
           newGrid[row][col] = player;
           break;
