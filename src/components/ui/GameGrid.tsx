@@ -5,8 +5,10 @@ const COLS = 7;
 const ROWS = 6;
 
 export function GameGrid() {
-  const { addDisc, getDiscs, playerOne, playerTwo, isGameWon } =
-    useGrid(ROWS, COLS);
+  const { addDisc, getDiscs, playerOne, playerTwo, isGameWon } = useGrid(
+    ROWS,
+    COLS
+  );
   const [player, setPlayer] = useState<Player>(playerTwo);
   useEffect(() => {
     console.log(`game is ${isGameWon(playerOne) ? "won!" : "not won yet..."}`);
@@ -19,6 +21,9 @@ export function GameGrid() {
           <div
             onClick={() => {
               addDisc(index % COLS, player);
+              setPlayer((prevPlayer) =>
+                prevPlayer === playerOne ? playerTwo : playerOne
+              );
             }}
             className={`h-10 border border-neutral-300 ${
               disc ? (disc === playerOne ? "bg-red-400" : "bg-yellow-400") : ""
