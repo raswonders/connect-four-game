@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGrid, Player } from "../useGrid";
+import { useTimer } from "../useTimer";
 
 const COLS = 7;
 const ROWS = 6;
@@ -10,8 +11,17 @@ export function GameGrid() {
     COLS
   );
   const [player, setPlayer] = useState<Player>(playerTwo);
+
   useEffect(() => {
-    console.log(`game is ${isGameWon(playerOne) ? "won!" : "not won yet..."}`);
+    if (isGameWon(playerOne)) {
+      console.log("Won!");
+    }
+  });
+
+  const timer = useTimer(() => {
+    setPlayer((prevPlayer) =>
+      prevPlayer === playerOne ? playerTwo : playerOne
+    );
   });
 
   return (
@@ -24,6 +34,7 @@ export function GameGrid() {
               setPlayer((prevPlayer) =>
                 prevPlayer === playerOne ? playerTwo : playerOne
               );
+              timer.restart();
             }}
             className={`h-10 border border-neutral-300 ${
               disc ? (disc === playerOne ? "bg-red-400" : "bg-yellow-400") : ""
