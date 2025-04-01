@@ -1,7 +1,7 @@
-import { GameGrid } from "./components/ui/GameGrid";
+import { Game } from "./components/ui/Game";
 
 function App() {
-  return <GameGrid />;
+  return <Game />;
 }
 
 export default App;
