@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-const TIMEOUT = 5000;
+const TIMEOUT = 30000;
 
 export function useTimer(callback: () => any) {
   const intervalRef = useRef<number>(undefined);
