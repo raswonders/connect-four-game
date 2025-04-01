@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useGrid, Player } from "../useGrid";
+import { useGrid } from "../useGrid";
 import { useTimer } from "../useTimer";
+import { Player } from "./PlayerCard";
 
 const COLS = 7;
 const ROWS = 6;

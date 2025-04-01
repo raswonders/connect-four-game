@@ -1,11 +1,10 @@
 import { useState } from "react";
+import { Player } from "./ui/PlayerCard";
 
 const playerAI = -1 as const;
 const playerOne = 1 as const;
 const playerTwo = 2 as const;
 const playerEmpty = 0 as const;
-
-export type Player = -1 | 0 | 1 | 2;
 
 export function useGrid(rows: number, cols: number) {
   const [grid, setGrid] = useState<Player[][]>(
