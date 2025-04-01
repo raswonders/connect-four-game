@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useGrid, Player } from "../useGrid";
 import { useTimer } from "../useTimer";
 
@@ -11,13 +11,6 @@ export function GameGrid() {
     COLS
   );
   const [player, setPlayer] = useState<Player>(playerTwo);
-
-  useEffect(() => {
-    if (isGameWon(playerOne)) {
-      console.log("Won!");
-    }
-  });
-
   const timer = useTimer(() => {
     setPlayer((prevPlayer) =>
       prevPlayer === playerOne ? playerTwo : playerOne

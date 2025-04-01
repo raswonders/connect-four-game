@@ -50,6 +50,7 @@ export function useGrid(rows: number, cols: number) {
       downLeftCheck(player, row, col)
     );
   }
+
   function rightCheck(player: Player, row: number, col: number) {
     for (let c = col + 1; c < col + 4; c++) {
       if (c >= cols) {
