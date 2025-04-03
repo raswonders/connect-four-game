@@ -8,9 +8,9 @@ export function Game() {
     <div>
       <Navbar />
       <div>
-        <PlayerCard player={1} />
+        <PlayerCard player={1} score={12} />
         <GameGrid />
-        <PlayerCard player={2} />
+        <PlayerCard player={2} score={0} />
       </div>
       <TurnDetails player={0} />
     </div>
