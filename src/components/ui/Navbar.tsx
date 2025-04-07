@@ -1,9 +1,13 @@
 import ovalYellow from "../../assets/oval-yellow.svg";
 import ovalRed from "../../assets/oval-red.svg";
 
-export function Navbar() {
+interface Props {
+  className: string;
+}
+
+export function Navbar({ className }: Props) {
   return (
-    <div className="flex justify-between items-center">
+    <div className={`flex justify-between items-center ${className}`}>
       <button className="rounded-full bg-dark-purple py-2 px-5 uppercase font-bold">
         Menu
       </button>

@@ -8,7 +8,11 @@ import GridRearUrl from "../../assets/grid-rear-layer.svg";
 const COLS = 7;
 const ROWS = 6;
 
-export function GameGrid() {
+interface Props {
+  className: string;
+}
+
+export function GameGrid({ className }: Props) {
   const { addDisc, getDiscs, playerOne, playerTwo, isGameWon } = useGrid(
     ROWS,
     COLS
@@ -21,7 +25,7 @@ export function GameGrid() {
   });
 
   return (
-    <div className="relative text-black">
+    <div className={`relative text-black ${className}`}>
       <img className="absolute" src={GridFrontUrl} alt="" />
       {/* Grid-based overlay for disc placement */}
       <div className="absolute w-full h-full grid grid-cols-7 grid-rows-6 gap-[3.7975%] p-[3.1646%] pb-[11.0759%]">
