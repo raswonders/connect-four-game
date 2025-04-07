@@ -5,14 +5,19 @@ export type Player = -1 | 0 | 1 | 2;
 type Props = {
   player: Player;
   score: number;
+  className?: string;
 };
 
-export function PlayerCard({ player, score }: Props) {
+export function PlayerCard({ player, score, className }: Props) {
   const icon = player === 1 ? PlayerOneIcon : PlayerTwoIcon;
   const name = player === 1 ? "Player 1" : "Player 2";
 
   return (
-    <div className="rounded-2xl flex-col items-center bg-black border-3 border-b-[16px] text-black basis-36 max-w-36">
+    <div
+      className={`w-full rounded-2xl flex-col items-center bg-black border-3 border-b-[16px] text-black ${
+        className ? className : ""
+      }`}
+    >
       <div className="flex flex-col items-center relative bg-white rounded-xl">
         <img src={icon} alt="" className="absolute -translate-y-1/2" />
         <div className="pt-12 pb-4 flex flex-col justify-center items-center">
