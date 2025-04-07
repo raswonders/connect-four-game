@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useGrid } from "../useGrid";
 import { useTimer } from "../useTimer";
 import { Player } from "./PlayerCard";
+import GridFrontUrl from "../../assets/grid-front-layer.svg";
+import GridRearUrl from "../../assets/grid-rear-layer.svg";
 
 const COLS = 7;
 const ROWS = 6;
@@ -19,30 +21,31 @@ export function GameGrid() {
   });
 
   return (
-    <>
-      <div className="grid grid-cols-7 grid-rows-6 gap-4">
-        {getDiscs().map((disc, index) => (
+    <div className="relative text-black">
+      <img className="absolute" src={GridFrontUrl} alt="" />
+      {/* Grid-based overlay for disc placement */}
+      <div className="absolute w-full h-full grid grid-cols-7 grid-rows-6 gap-[3.7975%] p-[3.1646%] pb-[11.0759%]">
+        {getDiscs().map(() => (
+          <div></div>
+        ))}
+      </div>
+      {/* Column-based overlay for clicks */}
+      <div className="absolute box-border w-full h-full flex px-[1.58%]">
+        {new Array(COLS).fill(null).map((_, col) => (
           <div
+            className="grow flex flex-col"
+            data-col={col}
             onClick={() => {
-              addDisc(index % COLS, player);
+              addDisc(col, player);
               setPlayer((prevPlayer) =>
                 prevPlayer === playerOne ? playerTwo : playerOne
               );
               timer.restart();
             }}
-            className={`h-10 border border-neutral-300 ${
-              disc ? (disc === playerOne ? "bg-red-400" : "bg-yellow-400") : ""
-            } column-${index % COLS}`}
           ></div>
         ))}
       </div>
-      <select
-        value={player}
-        onChange={(event) => setPlayer(parseInt(event.target.value) as Player)}
-      >
-        <option value="1">Player One</option>
-        <option value="2">Player Two</option>
-      </select>
-    </>
+      <img className="" src={GridRearUrl} alt="" />
+    </div>
   );
 }
