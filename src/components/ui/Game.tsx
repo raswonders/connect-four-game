@@ -20,8 +20,9 @@ export function Game() {
       />
       <GameGrid className="col-span-2 justify-self-center lg:order-1" />
       <TurnDetails
-        player={0}
-        className="lg:order-3 col-span-2 lg:col-span-4"
+        player={1}
+        seconds={14}
+        className="lg:order-3 col-span-2 lg:col-span-4 justify-self-center"
       />
     </div>
   );
