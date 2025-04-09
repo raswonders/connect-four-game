@@ -1,5 +1,6 @@
 import PlayerOneIcon from "../../assets/player-one.svg";
 import PlayerTwoIcon from "../../assets/player-two.svg";
+import { Card } from "./Card";
 export type Player = -1 | 0 | 1 | 2;
 
 type Props = {
@@ -13,11 +14,7 @@ export function PlayerCard({ player, score, className }: Props) {
   const name = player === 1 ? "Player 1" : "Player 2";
 
   return (
-    <div
-      className={`w-full rounded-2xl flex-col items-center bg-black border-3 border-b-[16px] text-black ${
-        className ? className : ""
-      }`}
-    >
+    <Card className={className}>
       <div className="flex flex-col items-center relative bg-white rounded-xl">
         <img src={icon} alt="" className="absolute -translate-y-1/2" />
         <div className="pt-12 pb-4 flex flex-col justify-center items-center">
@@ -25,6 +22,6 @@ export function PlayerCard({ player, score, className }: Props) {
           <h2 className="text-[56px] font-semibold m-0">{score}</h2>
         </div>
       </div>
-    </div>
+    </Card>
   );
 }
