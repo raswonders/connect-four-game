@@ -1,7 +1,7 @@
 import { GameGrid } from "./GameGrid";
 import { Navbar } from "./Navbar";
 import { PlayerCard } from "./PlayerCard";
-import { TurnDetails } from "./TurnDetails";
+import { TurnDetailsCard } from "./TurnDetailsCard";
 
 export function Game() {
   return (
@@ -19,10 +19,10 @@ export function Game() {
         className="self-center lg:order-2 justify-self-end"
       />
       <GameGrid className="col-span-2 justify-self-center lg:order-1" />
-      <TurnDetails
+      <TurnDetailsCard
         player={1}
         seconds={14}
-        className="lg:order-3 col-span-2 lg:col-span-4 justify-self-center"
+        className="-mt-18 sm:-mt-24 lg:order-3 col-span-2 lg:col-span-4 justify-self-center"
       />
     </div>
   );
