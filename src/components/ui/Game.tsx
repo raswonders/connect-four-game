@@ -9,11 +9,13 @@ export function Game() {
     <div className="px-5 mt-12 grid grid-cols-2 lg:grid-cols-4 justify-center gap-x-4 gap-y-12">
       <Navbar className="col-span-2 lg:col-span-4" />
       <PlayerCard
+        variant="left"
         player={1}
         score={12}
         className="self-center justify-self-start"
       />
       <PlayerCard
+        variant="right"
         player={2}
         score={0}
         className="self-center lg:order-2 justify-self-end"
