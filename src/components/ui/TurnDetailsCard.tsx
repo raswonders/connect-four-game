@@ -2,6 +2,7 @@ import { Player } from "./PlayerCard";
 import { Card } from "./Card";
 
 interface Props {
+  gameStatus: object;
   player: Player;
   winner?: Player;
   seconds: number;
@@ -10,7 +11,7 @@ interface Props {
 
 type CardVariant = "red" | "yellow" | "neutral";
 
-export function TurnDetailsCard({ player, winner, seconds, className }: Props) {
+export function TurnDetailsCard({ gameStatus, player, winner, seconds, className }: Props) {
   let cardVariant: CardVariant = "neutral";
   if (!winner) {
     switch (player) {

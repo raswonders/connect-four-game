@@ -10,9 +10,10 @@ const ROWS = 6;
 
 interface Props {
   className: string;
+  gameStatus: object;
 }
 
-export function GameGrid({ className }: Props) {
+export function GameGrid({ gameStatus, className }: Props) {
   const { addDisc, getDiscs, playerOne, playerTwo, isGameWon } = useGrid(
     ROWS,
     COLS
