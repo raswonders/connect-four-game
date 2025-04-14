@@ -9,20 +9,16 @@ const COLS = 7;
 const ROWS = 6;
 
 interface Props {
-  className: string;
   gameStatus: object;
+  player: Player;
+  className: string;
 }
 
-export function GameGrid({ gameStatus, className }: Props) {
-  const { addDisc, getDiscs, playerOne, playerTwo, isGameWon } = useGrid(
-    ROWS,
-    COLS
-  );
-  const [player, setPlayer] = useState<Player>(playerTwo);
+export function GameGrid({ gameStatus, className, player }: Props) {
+  const { addDisc, getDiscs, isGameWon } = useGrid(ROWS, COLS);
+
   const timer = useTimer(() => {
-    setPlayer((prevPlayer) =>
-      prevPlayer === playerOne ? playerTwo : playerOne
-    );
+    // TODO: swap active player
   });
 
   return (
@@ -42,9 +38,7 @@ export function GameGrid({ gameStatus, className }: Props) {
             data-col={col}
             onClick={() => {
               addDisc(col, player);
-              setPlayer((prevPlayer) =>
-                prevPlayer === playerOne ? playerTwo : playerOne
-              );
+              // TODO: swap active player
               timer.restart();
             }}
           ></div>

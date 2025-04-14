@@ -11,10 +11,19 @@ interface Props {
 
 type CardVariant = "red" | "yellow" | "neutral";
 
-export function TurnDetailsCard({ gameStatus, player, winner, seconds, className }: Props) {
+export function TurnDetailsCard({
+  gameStatus,
+  player,
+  winner,
+  seconds,
+  className,
+}: Props) {
   let cardVariant: CardVariant = "neutral";
   if (!winner) {
-    switch (player) {
+    switch (player.id) {
+      case 0:
+        cardVariant = "yellow";
+        break;
       case 1:
         cardVariant = "red";
         break;
@@ -27,7 +36,7 @@ export function TurnDetailsCard({ gameStatus, player, winner, seconds, className
   return (
     <Card variant={cardVariant} className={`max-w-56 ${className ?? ""}`}>
       <div className="m-4 text-center">
-        <h1 className="uppercase font-bold text-xl">Player's {player} turn</h1>
+        <h1 className="uppercase font-bold text-xl">Player's {player.id} turn</h1>
         <h2 className="text-[56px] font-semibold">{seconds}s</h2>
       </div>
     </Card>

@@ -1,7 +1,13 @@
 import RedSmiley from "../../assets/red-smiley.svg";
 import YellowSmiley from "../../assets/yellow-smiley.svg";
 import { Card } from "./Card";
-export type Player = -1 | 0 | 1 | 2;
+
+export type PlayerId = 0 | 1 | 2;
+export type Player = {
+  id: PlayerId;
+  score: number;
+  isActive: boolean;
+};
 
 type Props = {
   player: Player;
@@ -11,16 +17,29 @@ type Props = {
 };
 
 export function PlayerCard({ player, score, variant, className }: Props) {
-  const iconUrl = player === 1 ? RedSmiley : YellowSmiley;
-  const name = player === 1 ? "Player 1" : "Player 2";
+  let name = "Unknown";
+  switch (player.id) {
+    case 0:
+      name = "CPU";
+      break;
+    case 1:
+      name = "Player 1";
+      break;
+    case 2:
+      name = "Player 2";
+      break;
+  }
 
   let iconCss = "";
+  let iconUrl;
   switch (variant) {
     case "left":
       iconCss = "left-0 -translate-x-1/2";
+      iconUrl = RedSmiley;
       break;
     case "right":
       iconCss = "right-0 lg:right-auto translate-x-1/2 lg:-translate-x-1/2";
+      iconUrl = YellowSmiley;
       break;
   }
 
