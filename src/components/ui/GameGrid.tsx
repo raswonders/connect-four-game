@@ -12,6 +12,7 @@ interface Props {
   player: Player;
   className: string;
   onTurnChange: () => void;
+  handleGameOver: (result: Player | "draw") => void;
 }
 
 export function GameGrid({

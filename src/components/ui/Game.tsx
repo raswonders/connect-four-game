@@ -9,9 +9,6 @@ export type GameStatus = {
   result?: Player | "draw";
 };
 export function Game() {
-  // TODO: gameState running | paused | gameOver
-  // TODO: gameResult
-
   const [gameStatus, setGameStatus] = useState<GameStatus>({
     status: "running",
   });
@@ -44,14 +41,18 @@ export function Game() {
       case "running":
         setGameStatus({ status: "paused" });
         timer.pause();
-        console.log("game paused!")
+        console.log("game paused!");
         break;
       case "paused":
         setGameStatus({ status: "running" });
         timer.resume();
-        console.log("game resumed!")
+        console.log("game resumed!");
         break;
     }
+  }
+
+  function handleGameOver(result: Player | "draw") {
+    setGameStatus({ status: "gameOver", result: result });
   }
 
   return (
@@ -71,6 +72,7 @@ export function Game() {
       />
       <GameGrid
         gameStatus={gameStatus}
+        handleGameOver={handleGameOver}
         onTurnChange={onTurnChange}
         player={players.filter((p) => p.isActive)[0]}
         className="col-span-2 justify-self-center lg:order-1"
