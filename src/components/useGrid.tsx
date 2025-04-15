@@ -1,16 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PlayerId } from "./ui/PlayerCard";
+import { GameResult } from "./ui/Game";
 
 const playerCPU = 0 as const;
 const playerOne = 1 as const;
 const playerTwo = 2 as const;
 
-export function useGrid(rows: number, cols: number) {
+export function useGrid(
+  rows: number,
+  cols: number,
+  handleGameOver: (arg: GameResult) => void
+) {
   const [grid, setGrid] = useState<(PlayerId | null)[][]>(
     Array.from({ length: rows }, () => {
       return Array(cols).fill(null);
     })
   );
+  const [lastPlayerId, setLastPlayerId] = useState<PlayerId>();
+
+  function isGridFull() {
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        if (grid[row][col] === null) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
 
   function addDisc(col: number, playerId: PlayerId) {
     setGrid((prevGrid) => {
@@ -23,6 +40,7 @@ export function useGrid(rows: number, cols: number) {
       }
       return newGrid;
     });
+    setLastPlayerId(playerId);
   }
 
   function getDiscs() {
@@ -96,6 +114,14 @@ export function useGrid(rows: number, cols: number) {
     }
     return true;
   }
+
+  useEffect(() => {
+    if (lastPlayerId && isGameWon(lastPlayerId)) {
+      handleGameOver(lastPlayerId);
+    } else if (isGridFull()) {
+      handleGameOver("draw");
+    }
+  }, [lastPlayerId]);
 
   return { addDisc, getDiscs, playerOne, playerTwo, isGameWon };
 }

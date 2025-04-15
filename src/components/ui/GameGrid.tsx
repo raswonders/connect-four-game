@@ -1,5 +1,5 @@
 import { useGrid } from "../useGrid";
-import { Player } from "./PlayerCard";
+import { Player, PlayerId } from "./PlayerCard";
 import GridFrontUrl from "../../assets/grid-front-layer.svg";
 import GridRearUrl from "../../assets/grid-rear-layer.svg";
 import { GameStatus } from "./Game";
@@ -14,7 +14,7 @@ interface Props {
   players: Player[];
   className: string;
   onTurnChange: () => void;
-  handleGameOver: (result: Player | "draw") => void;
+  handleGameOver: (result: PlayerId | "draw") => void;
 }
 
 export function GameGrid({
@@ -22,8 +22,9 @@ export function GameGrid({
   className,
   players,
   onTurnChange,
+  handleGameOver,
 }: Props) {
-  const { addDisc, getDiscs, isGameWon } = useGrid(ROWS, COLS);
+  const { addDisc, getDiscs, isGameWon } = useGrid(ROWS, COLS, handleGameOver);
   let currentPlayer = players.filter((p) => p.isActive)[0];
 
   return (

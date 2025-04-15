@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { GameGrid } from "./GameGrid";
 import { Navbar } from "./Navbar";
-import { Player, PlayerCard } from "./PlayerCard";
+import { Player, PlayerCard, PlayerId } from "./PlayerCard";
 import { TurnDetailsCard } from "./TurnDetailsCard";
 import { useTimer } from "../useTimer";
 export type GameStatus = {
   status: "running" | "paused" | "gameOver";
-  result?: Player | "draw";
+  result?: PlayerId | "draw";
 };
+
+export type GameResult = PlayerId | "draw";
+
 export function Game() {
   const [gameStatus, setGameStatus] = useState<GameStatus>({
     status: "running",
@@ -51,8 +54,9 @@ export function Game() {
     }
   }
 
-  function handleGameOver(result: Player | "draw") {
+  function handleGameOver(result: GameResult) {
     setGameStatus({ status: "gameOver", result: result });
+    timer.stop();
   }
 
   return (
