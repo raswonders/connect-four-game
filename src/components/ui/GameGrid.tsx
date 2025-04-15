@@ -1,6 +1,4 @@
-import { useState } from "react";
 import { useGrid } from "../useGrid";
-import { useTimer } from "../useTimer";
 import { Player } from "./PlayerCard";
 import GridFrontUrl from "../../assets/grid-front-layer.svg";
 import GridRearUrl from "../../assets/grid-rear-layer.svg";
@@ -12,14 +10,16 @@ interface Props {
   gameStatus: object;
   player: Player;
   className: string;
+  onTurnChange: () => void;
 }
 
-export function GameGrid({ gameStatus, className, player }: Props) {
+export function GameGrid({
+  gameStatus,
+  className,
+  player,
+  onTurnChange,
+}: Props) {
   const { addDisc, getDiscs, isGameWon } = useGrid(ROWS, COLS);
-
-  const timer = useTimer(() => {
-    // TODO: swap active player
-  });
 
   return (
     <div className={`relative text-black ${className}`}>
@@ -38,8 +38,7 @@ export function GameGrid({ gameStatus, className, player }: Props) {
             data-col={col}
             onClick={() => {
               addDisc(col, player);
-              // TODO: swap active player
-              timer.restart();
+              onTurnChange();
             }}
           ></div>
         ))}
