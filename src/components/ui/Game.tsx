@@ -37,9 +37,24 @@ export function Game() {
     timer.restart();
   }
 
+  function handlePause() {
+    switch (gameStatus.status) {
+      case "running":
+        setGameStatus({ status: "paused" });
+        timer.pause();
+        console.log("game paused!")
+        break;
+      case "paused":
+        setGameStatus({ status: "running" });
+        timer.resume();
+        console.log("game resumed!")
+        break;
+    }
+  }
+
   return (
     <div className="px-5 mt-12 grid grid-cols-2 lg:grid-cols-4 justify-center gap-x-4 gap-y-12">
-      <Navbar className="col-span-2 lg:col-span-4" />
+      <Navbar handlePause={handlePause} className="col-span-2 lg:col-span-4" />
       <PlayerCard
         variant="left"
         player={players[0]}
