@@ -1,10 +1,10 @@
 import { Player } from "./PlayerCard";
 import { Card } from "./Card";
+import { GameStatus } from "./Game";
 
 interface Props {
-  gameStatus: object;
-  player: Player;
-  winner?: Player;
+  gameStatus: GameStatus;
+  players: Player[];
   seconds: number;
   className?: string;
 }
@@ -13,14 +13,14 @@ type CardVariant = "red" | "yellow" | "neutral";
 
 export function TurnDetailsCard({
   gameStatus,
-  player,
-  winner,
+  players,
   seconds,
   className,
 }: Props) {
+  let currentPlayer = players.filter((p) => p.isActive)[0];
   let cardVariant: CardVariant = "neutral";
-  if (!winner) {
-    switch (player.id) {
+  if (gameStatus.status !== "gameOver") {
+    switch (currentPlayer.id) {
       case 0:
         cardVariant = "yellow";
         break;
@@ -36,7 +36,9 @@ export function TurnDetailsCard({
   return (
     <Card variant={cardVariant} className={`max-w-56 ${className ?? ""}`}>
       <div className="m-4 text-center">
-        <h1 className="uppercase font-bold text-xl">Player's {player.id} turn</h1>
+        <h1 className="uppercase font-bold text-xl">
+          Player's {currentPlayer.id} turn
+        </h1>
         <h2 className="text-[56px] font-semibold">{seconds}s</h2>
       </div>
     </Card>

@@ -79,6 +79,7 @@ export function Game() {
       />
       <TurnDetailsCard
         gameStatus={gameStatus}
+        players={players}
         player={players.filter((p) => p.isActive)[0]}
         seconds={timer.secondsLeft}
         className="-mt-18 sm:-mt-24 lg:order-3 col-span-2 lg:col-span-4 justify-self-center"
