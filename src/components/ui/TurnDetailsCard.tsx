@@ -35,12 +35,33 @@ export function TurnDetailsCard({
 
   return (
     <Card variant={cardVariant} className={`max-w-56 ${className ?? ""}`}>
-      <div className="m-4 text-center">
-        <h1 className="uppercase font-bold text-xl">
-          Player's {currentPlayer.id} turn
-        </h1>
-        <h2 className="text-[56px] font-semibold">{seconds}s</h2>
-      </div>
+      {gameStatus.status === "gameOver" ? (
+        <div className="m-4 text-center">
+          <h1 className="uppercase font-bold text-xl">
+            {gameStatus.result === "draw"
+              ? "Game Over"
+              : `Player ${gameStatus.result}`}
+          </h1>
+          <h2 className="uppercase text-[56px] font-semibold">
+            {gameStatus.result === "draw" ? "draw" : "wins"}
+          </h2>
+          <button
+            onClick={() => {
+              // TODO: implement game restart
+            }}
+            className="text-white min-w-32 rounded-full bg-figma-dark-purple p-2 uppercase font-bold"
+          >
+            Play Again
+          </button>
+        </div>
+      ) : (
+        <div className="m-4 text-center">
+          <h1 className="uppercase font-bold text-xl">
+            Player's {currentPlayer.id} turn
+          </h1>
+          <h2 className="text-[56px] font-semibold">{seconds}s</h2>
+        </div>
+      )}
     </Card>
   );
 }
