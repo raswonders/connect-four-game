@@ -9,7 +9,7 @@ const ROWS = 6;
 
 interface Props {
   gameStatus: GameStatus;
-  player: Player;
+  players: Player[];
   className: string;
   onTurnChange: () => void;
   handleGameOver: (result: Player | "draw") => void;
@@ -18,10 +18,11 @@ interface Props {
 export function GameGrid({
   gameStatus,
   className,
-  player,
+  players,
   onTurnChange,
 }: Props) {
   const { addDisc, getDiscs, isGameWon } = useGrid(ROWS, COLS);
+  let currentPlayer = players.filter((p) => p.isActive)[0];
 
   return (
     <div className={`relative text-black ${className}`}>
@@ -40,7 +41,7 @@ export function GameGrid({
             data-col={col}
             onClick={() => {
               if (gameStatus.status === "running") {
-                addDisc(col, player);
+                addDisc(col, currentPlayer.id);
                 onTurnChange();
               }
             }}
