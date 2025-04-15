@@ -4,7 +4,7 @@ import { Navbar } from "./Navbar";
 import { Player, PlayerCard } from "./PlayerCard";
 import { TurnDetailsCard } from "./TurnDetailsCard";
 import { useTimer } from "../useTimer";
-type GameStatus = {
+export type GameStatus = {
   status: "running" | "paused" | "gameOver";
   result?: Player | "draw";
 };
@@ -12,7 +12,9 @@ export function Game() {
   // TODO: gameState running | paused | gameOver
   // TODO: gameResult
 
-  const [gameStatus, setGameStatus] = useState({ status: "running" });
+  const [gameStatus, setGameStatus] = useState<GameStatus>({
+    status: "running",
+  });
   const [players, setPlayers] = useState<Player[]>([
     { id: 1, score: 0, isActive: true },
     { id: 2, score: 0, isActive: false },

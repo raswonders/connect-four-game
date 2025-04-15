@@ -2,12 +2,13 @@ import { useGrid } from "../useGrid";
 import { Player } from "./PlayerCard";
 import GridFrontUrl from "../../assets/grid-front-layer.svg";
 import GridRearUrl from "../../assets/grid-rear-layer.svg";
+import { GameStatus } from "./Game";
 
 const COLS = 7;
 const ROWS = 6;
 
 interface Props {
-  gameStatus: object;
+  gameStatus: GameStatus;
   player: Player;
   className: string;
   onTurnChange: () => void;
@@ -37,8 +38,10 @@ export function GameGrid({
             className="grow flex flex-col"
             data-col={col}
             onClick={() => {
-              addDisc(col, player);
-              onTurnChange();
+              if (gameStatus.status === "running") {
+                addDisc(col, player);
+                onTurnChange();
+              }
             }}
           ></div>
         ))}
