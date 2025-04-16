@@ -1,7 +1,7 @@
+import { Game } from "./components/ui/Game";
+
 function App() {
-  return (
-    <h1 className="text-2xl">Hello world</h1>
-  )
+  return <Game />;
 }
 
-export default App
+export default App;
