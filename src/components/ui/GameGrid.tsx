@@ -26,7 +26,11 @@ export function GameGrid({
   handleTurnChange,
   handleGameOver,
 }: Props) {
-  const { addDisc, getDiscs, clearGrid } = useGrid(ROWS, COLS, handleGameOver);
+  const { addDisc, getDiscs, clearGrid, columnHasSpace } = useGrid(
+    ROWS,
+    COLS,
+    handleGameOver
+  );
   let currentPlayer = players.filter((p) => p.isActive)[0];
   const prevRound = usePrevious(gameStatus.round);
 
@@ -54,7 +58,7 @@ export function GameGrid({
             className="grow flex flex-col"
             data-col={col}
             onClick={() => {
-              if (gameStatus.status === "running") {
+              if (columnHasSpace(col) && gameStatus.status === "running") {
                 addDisc(col, currentPlayer.id);
                 handleTurnChange();
               }

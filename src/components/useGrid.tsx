@@ -123,6 +123,10 @@ export function useGrid(
     return true;
   }
 
+  function columnHasSpace(col: number) {
+    return grid[0][col] === null;
+  }
+
   useEffect(() => {
     if (lastPlayerId && isGameWon(lastPlayerId)) {
       handleGameOver(lastPlayerId);
@@ -131,5 +135,13 @@ export function useGrid(
     }
   }, [lastPlayerId]);
 
-  return { addDisc, getDiscs, playerOne, playerTwo, isGameWon, clearGrid };
+  return {
+    addDisc,
+    getDiscs,
+    playerOne,
+    playerTwo,
+    isGameWon,
+    clearGrid,
+    columnHasSpace,
+  };
 }
