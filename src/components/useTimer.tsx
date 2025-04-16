@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 const TURN_DURATION = 30;
 
 export function useTimer(callback: () => void) {
-  const [secondsLeft, setSecondsLeft] = useState<number>(TURN_DURATION - 1);
+  const [secondsLeft, setSecondsLeft] = useState<number>(TURN_DURATION);
   const timeoutRef = useRef(0);
 
   const timer = {
@@ -23,7 +23,7 @@ export function useTimer(callback: () => void) {
     },
 
     reset() {
-      setSecondsLeft(TURN_DURATION - 1);
+      setSecondsLeft(TURN_DURATION);
     },
 
     pause() {
@@ -40,7 +40,7 @@ export function useTimer(callback: () => void) {
   };
 
   useEffect(() => {
-    if (secondsLeft < 0) {
+    if (secondsLeft <= 0) {
       callback();
       timer.reset();
       return;
