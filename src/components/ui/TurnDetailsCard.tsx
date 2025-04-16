@@ -7,6 +7,7 @@ interface Props {
   players: Player[];
   seconds: number;
   className?: string;
+  handleGameRestart: () => void;
 }
 
 type CardVariant = "red" | "yellow" | "neutral";
@@ -16,6 +17,7 @@ export function TurnDetailsCard({
   players,
   seconds,
   className,
+  handleGameRestart,
 }: Props) {
   let currentPlayer = players.filter((p) => p.isActive)[0];
   let cardVariant: CardVariant = "neutral";
@@ -46,9 +48,7 @@ export function TurnDetailsCard({
             {gameStatus.winner === "draw" ? "draw" : "wins"}
           </h2>
           <button
-            onClick={() => {
-              // TODO: implement game restart
-            }}
+            onClick={() => handleGameRestart()}
             className="text-white min-w-32 rounded-full bg-figma-dark-purple p-2 uppercase font-bold"
           >
             Play Again

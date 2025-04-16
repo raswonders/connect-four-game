@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { PlayerId } from "./ui/PlayerCard";
 import { Winner } from "./ui/Game";
 
@@ -46,6 +46,14 @@ export function useGrid(
   function getDiscs() {
     return grid.flat();
   }
+
+  const clearGrid = useCallback(() => {
+    setGrid(
+      Array.from({ length: rows }, () => {
+        return Array(cols).fill(null);
+      })
+    );
+  }, [rows, cols]);
 
   function isGameWon(playerId: PlayerId): boolean {
     for (let row = 0; row < rows; row++) {
@@ -123,5 +131,5 @@ export function useGrid(
     }
   }, [lastPlayerId]);
 
-  return { addDisc, getDiscs, playerOne, playerTwo, isGameWon };
+  return { addDisc, getDiscs, playerOne, playerTwo, isGameWon, clearGrid };
 }

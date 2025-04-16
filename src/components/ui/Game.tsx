@@ -6,6 +6,7 @@ import { TurnDetailsCard } from "./TurnDetailsCard";
 import { useTimer } from "../useTimer";
 export type GameStatus = {
   status: "running" | "paused" | "gameOver";
+  round: number;
   winner?: PlayerId | "draw";
 };
 
@@ -14,6 +15,7 @@ export type Winner = PlayerId | "draw";
 export function Game() {
   const [gameStatus, setGameStatus] = useState<GameStatus>({
     status: "running",
+    round: 0,
   });
   const [players, setPlayers] = useState<Player[]>([
     { id: 1, score: 0, isActive: true },
@@ -25,13 +27,12 @@ export function Game() {
   });
 
   function changeActivePlayer() {
-    setPlayers((prev) => {
-      const winner = prev.map((player) => ({
+    setPlayers((prev) =>
+      prev.map((player) => ({
         ...player,
         isActive: !player.isActive,
-      }));
-      return winner;
-    });
+      }))
+    );
   }
 
   function onTurnChange() {
@@ -42,21 +43,30 @@ export function Game() {
   function handlePause() {
     switch (gameStatus.status) {
       case "running":
-        setGameStatus({ status: "paused" });
+        setGameStatus((prev) => ({ ...prev, status: "paused" }));
         timer.pause();
         console.log("game paused!");
         break;
       case "paused":
-        setGameStatus({ status: "running" });
+        setGameStatus((prev) => ({ ...prev, status: "running" }));
         timer.resume();
         console.log("game resumed!");
         break;
     }
   }
 
+  function handleGameRestart() {
+    setGameStatus((prev) => ({
+      ...prev,
+      status: "running",
+      round: prev.round + 1,
+    }));
+    timer.restart();
+  }
+
   function handleGameOver(winner: Winner) {
     timer.stop();
-    setGameStatus({ status: "gameOver", winner: winner });
+    setGameStatus((prev) => ({ ...prev, status: "gameOver", winner: winner }));
     if (winner !== "draw") {
       setPlayers((prev) =>
         prev.map((player) =>
@@ -70,7 +80,11 @@ export function Game() {
 
   return (
     <div className="px-5 mt-12 grid grid-cols-2 lg:grid-cols-4 justify-center gap-x-4 gap-y-12">
-      <Navbar handlePause={handlePause} className="col-span-2 lg:col-span-4" />
+      <Navbar
+        handlePause={handlePause}
+        handleGameRestart={handleGameRestart}
+        className="col-span-2 lg:col-span-4"
+      />
       <PlayerCard
         variant="left"
         player={players[0]}
@@ -89,6 +103,7 @@ export function Game() {
         className="col-span-2 justify-self-center lg:order-1"
       />
       <TurnDetailsCard
+        handleGameRestart={handleGameRestart}
         gameStatus={gameStatus}
         players={players}
         seconds={timer.secondsLeft}

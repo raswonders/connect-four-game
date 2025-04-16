@@ -5,6 +5,8 @@ import GridRearUrl from "../../assets/grid-rear-layer.svg";
 import { GameStatus } from "./Game";
 import RedOval from "../../assets/oval-red-big.svg";
 import YellowOval from "../../assets/oval-yellow-big.svg";
+import { usePrevious } from "../usePrevious";
+import { useEffect } from "react";
 
 const COLS = 7;
 const ROWS = 6;
@@ -24,8 +26,15 @@ export function GameGrid({
   onTurnChange,
   handleGameOver,
 }: Props) {
-  const { addDisc, getDiscs} = useGrid(ROWS, COLS, handleGameOver);
+  const { addDisc, getDiscs, clearGrid } = useGrid(ROWS, COLS, handleGameOver);
   let currentPlayer = players.filter((p) => p.isActive)[0];
+  const prevRound = usePrevious(gameStatus.round);
+
+  useEffect(() => {
+    if (prevRound !== gameStatus.round) {
+      clearGrid();
+    }
+  }, [gameStatus.round, prevRound, clearGrid]);
 
   return (
     <div className={`z-0 relative text-black ${className}`}>
