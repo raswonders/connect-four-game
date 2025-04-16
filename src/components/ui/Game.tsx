@@ -35,7 +35,7 @@ export function Game() {
     );
   }
 
-  function onTurnChange() {
+  function handleTurnChange() {
     changeActivePlayer();
     timer.restart();
   }
@@ -98,7 +98,7 @@ export function Game() {
       <GameGrid
         gameStatus={gameStatus}
         handleGameOver={handleGameOver}
-        onTurnChange={onTurnChange}
+        handleTurnChange={handleTurnChange}
         players={players}
         className="col-span-2 justify-self-center lg:order-1"
       />
