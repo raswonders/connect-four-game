@@ -11,12 +11,11 @@ export type Player = {
 
 type Props = {
   player: Player;
-  score: number;
   variant: "left" | "right";
   className?: string;
 };
 
-export function PlayerCard({ player, score, variant, className }: Props) {
+export function PlayerCard({ player, variant, className }: Props) {
   let name = "Unknown";
   switch (player.id) {
     case 0:
@@ -55,7 +54,7 @@ export function PlayerCard({ player, score, variant, className }: Props) {
           <h1 className="uppercase text-base sm:text-xl font-bold m-0">
             {name}
           </h1>
-          <h2 className="text-3xl sm:text-[56px] font-bold m-0">{score}</h2>
+          <h2 className="text-3xl sm:text-[56px] font-bold m-0">{player.score}</h2>
         </div>
       </div>
     </Card>

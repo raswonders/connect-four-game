@@ -65,13 +65,11 @@ export function Game() {
       <PlayerCard
         variant="left"
         player={players[0]}
-        score={15}
         className="self-center justify-self-start"
       />
       <PlayerCard
         variant="right"
         player={players[1]}
-        score={0}
         className="self-center lg:order-2 justify-self-end"
       />
       <GameGrid
