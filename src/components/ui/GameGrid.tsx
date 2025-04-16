@@ -14,7 +14,7 @@ interface Props {
   players: Player[];
   className: string;
   onTurnChange: () => void;
-  handleGameOver: (result: PlayerId | "draw") => void;
+  handleGameOver: (winner: PlayerId | "draw") => void;
 }
 
 export function GameGrid({
@@ -24,7 +24,7 @@ export function GameGrid({
   onTurnChange,
   handleGameOver,
 }: Props) {
-  const { addDisc, getDiscs, isGameWon } = useGrid(ROWS, COLS, handleGameOver);
+  const { addDisc, getDiscs} = useGrid(ROWS, COLS, handleGameOver);
   let currentPlayer = players.filter((p) => p.isActive)[0];
 
   return (

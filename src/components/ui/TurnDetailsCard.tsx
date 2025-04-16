@@ -38,12 +38,12 @@ export function TurnDetailsCard({
       {gameStatus.status === "gameOver" ? (
         <div className="m-4 text-center">
           <h1 className="uppercase font-bold text-xl">
-            {gameStatus.result === "draw"
+            {gameStatus.winner === "draw"
               ? "Game Over"
-              : `Player ${gameStatus.result}`}
+              : `Player ${gameStatus.winner}`}
           </h1>
           <h2 className="uppercase text-[56px] font-semibold">
-            {gameStatus.result === "draw" ? "draw" : "wins"}
+            {gameStatus.winner === "draw" ? "draw" : "wins"}
           </h2>
           <button
             onClick={() => {

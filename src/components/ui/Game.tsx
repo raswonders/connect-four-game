@@ -6,10 +6,10 @@ import { TurnDetailsCard } from "./TurnDetailsCard";
 import { useTimer } from "../useTimer";
 export type GameStatus = {
   status: "running" | "paused" | "gameOver";
-  result?: PlayerId | "draw";
+  winner?: PlayerId | "draw";
 };
 
-export type GameResult = PlayerId | "draw";
+export type Winner = PlayerId | "draw";
 
 export function Game() {
   const [gameStatus, setGameStatus] = useState<GameStatus>({
@@ -26,11 +26,11 @@ export function Game() {
 
   function changeActivePlayer() {
     setPlayers((prev) => {
-      const result = prev.map((player) => ({
+      const winner = prev.map((player) => ({
         ...player,
         isActive: !player.isActive,
       }));
-      return result;
+      return winner;
     });
   }
 
@@ -54,9 +54,18 @@ export function Game() {
     }
   }
 
-  function handleGameOver(result: GameResult) {
-    setGameStatus({ status: "gameOver", result: result });
+  function handleGameOver(winner: Winner) {
     timer.stop();
+    setGameStatus({ status: "gameOver", winner: winner });
+    if (winner !== "draw") {
+      setPlayers((prev) =>
+        prev.map((player) =>
+          player.id === winner
+            ? { ...player, score: player.score + 1 }
+            : { ...player }
+        )
+      );
+    }
   }
 
   return (
