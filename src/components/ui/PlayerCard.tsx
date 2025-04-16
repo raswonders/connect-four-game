@@ -2,7 +2,7 @@ import RedSmiley from "../../assets/red-smiley.svg";
 import YellowSmiley from "../../assets/yellow-smiley.svg";
 import { Card } from "./Card";
 
-export type PlayerId = 0 | 1 | 2;
+export type PlayerId = "cpu" | "p1" | "p2";
 export type Player = {
   id: PlayerId;
   score: number;
@@ -18,13 +18,13 @@ type Props = {
 export function PlayerCard({ player, variant, className }: Props) {
   let name = "Unknown";
   switch (player.id) {
-    case 0:
+    case "cpu":
       name = "CPU";
       break;
-    case 1:
+    case "p1":
       name = "Player 1";
       break;
-    case 2:
+    case "p2":
       name = "Player 2";
       break;
   }
@@ -54,7 +54,9 @@ export function PlayerCard({ player, variant, className }: Props) {
           <h1 className="uppercase text-base sm:text-xl font-bold m-0">
             {name}
           </h1>
-          <h2 className="text-3xl sm:text-[56px] font-bold m-0">{player.score}</h2>
+          <h2 className="text-3xl sm:text-[56px] font-bold m-0">
+            {player.score}
+          </h2>
         </div>
       </div>
     </Card>

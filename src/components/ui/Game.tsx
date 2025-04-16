@@ -18,8 +18,8 @@ export function Game() {
     round: 0,
   });
   const [players, setPlayers] = useState<Player[]>([
-    { id: 1, score: 0, isActive: true },
-    { id: 2, score: 0, isActive: false },
+    { id: "p1", score: 0, isActive: true },
+    { id: "p2", score: 0, isActive: false },
   ]);
 
   const timer = useTimer(() => {

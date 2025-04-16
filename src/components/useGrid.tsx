@@ -2,16 +2,15 @@ import { useCallback, useEffect, useState } from "react";
 import { PlayerId } from "./ui/PlayerCard";
 import { Winner } from "./ui/Game";
 
-const playerCPU = 0 as const;
-const playerOne = 1 as const;
-const playerTwo = 2 as const;
+type SolutionId<T extends PlayerId> = T extends T ? `${T}*` : never;
+type GridItem = PlayerId | SolutionId<PlayerId> | null;
 
 export function useGrid(
   rows: number,
   cols: number,
   handleGameOver: (arg: Winner) => void
 ) {
-  const [grid, setGrid] = useState<(PlayerId | null)[][]>(
+  const [grid, setGrid] = useState<GridItem[][]>(
     Array.from({ length: rows }, () => {
       return Array(cols).fill(null);
     })
@@ -138,8 +137,6 @@ export function useGrid(
   return {
     addDisc,
     getDiscs,
-    playerOne,
-    playerTwo,
     isGameWon,
     clearGrid,
     columnHasSpace,

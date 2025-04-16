@@ -23,13 +23,13 @@ export function TurnDetailsCard({
   let cardVariant: CardVariant = "neutral";
   if (gameStatus.status !== "gameOver") {
     switch (currentPlayer.id) {
-      case 0:
+      case "cpu":
         cardVariant = "yellow";
         break;
-      case 1:
+      case "p1":
         cardVariant = "red";
         break;
-      case 2:
+      case "p2":
         cardVariant = "yellow";
         break;
     }
