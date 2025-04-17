@@ -146,7 +146,7 @@ export function useGrid(
     return grid.flat();
   }
 
-  const clearGrid = useCallback(() => {
+  const clearDiscs = useCallback(() => {
     setGrid(
       Array.from({ length: rows }, () => {
         return Array(cols).fill(null);
@@ -161,7 +161,7 @@ export function useGrid(
   return {
     addDisc,
     getDiscs,
-    clearGrid,
+    clearGrid: clearDiscs,
     columnHasSpace,
   };
 }
