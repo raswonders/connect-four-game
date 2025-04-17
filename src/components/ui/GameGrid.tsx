@@ -46,7 +46,14 @@ export function GameGrid({
       <div className="absolute w-full h-full grid grid-cols-7 grid-rows-6 gap-[3.7975%] p-[3.1646%] pb-[11.0759%]">
         {getDiscs().map((disc) => (
           <div>
-            {disc && <img src={disc === "p1" ? RedOval : YellowOval} alt="" />}
+            {disc && (
+              <div>
+                <img
+                  src={disc.startsWith("p1") ? RedOval : YellowOval}
+                  alt=""
+                />
+              </div>
+            )}
           </div>
         ))}
       </div>
